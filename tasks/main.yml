@@ -1,0 +1,11 @@
+---
+
+- name: Add Groups to Secondary SQL Server Login
+  script: sqlGroups.ps1 "{{runAsUser}}" {{runAsPassword}} {{SqlServerName}} {{SecondarySqlServerName}}
+
+- name: Run powershell script to back up database, restore to secondary and join availability groups
+  script: joinag.ps1 "{{runAsUser}}" {{runAsPassword}} "{{SharePath}}" {{item}} {{SqlServerName}} {{SecondarySqlServerName}} {{DCServerName}} {{AgName}} {{AgListener}}
+  with_items: "backupDBs.split(',')"
+
+- name: Execute CRm Assymetric key queries
+  script: sqlAsyncQueries.ps1 "{{runAsUser}}" {{runAsPassword}} {{SecondarySqlServerName}}

@@ -1,0 +1,29 @@
+---
+
+#dnetBIOS
+dnetBIOS: "core-staging"
+
+#runAsUser
+runAsUser: "{{dnetBIOS}}\\crmadmin"
+
+#runAsPassword
+runAsPassword: "R3cruit3r"
+
+#SqlServerName
+SqlServerName: "SQL01"
+
+SecondarySqlServerName: "SQL02"
+
+DCServerName: "DC01"
+
+#AgName
+AgName: "CRMSQLAG1"
+
+#AgListener
+AgListener: "CRMSQLAG1L"
+
+# Note: Appending trailing and preceding slashes to share path in powershell script due to escaping issues in ansible
+SharePath: "{{DCServerName}}\\SQLAGReplica"
+
+# DB's to backup
+backupDBs: "ReportServer,ReportServerTempDB,MSCRM_CONFIG"
